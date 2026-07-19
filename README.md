@@ -8,22 +8,22 @@
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
- [go-ci-svg]: https://github.com/plexusone/omnidevx-core/actions/workflows/go-ci.yaml/badge.svg?branch=main
- [go-ci-url]: https://github.com/plexusone/omnidevx-core/actions/workflows/go-ci.yaml
- [go-lint-svg]: https://github.com/plexusone/omnidevx-core/actions/workflows/go-lint.yaml/badge.svg?branch=main
- [go-lint-url]: https://github.com/plexusone/omnidevx-core/actions/workflows/go-lint.yaml
- [go-sast-svg]: https://github.com/plexusone/omnidevx-core/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
- [go-sast-url]: https://github.com/plexusone/omnidevx-core/actions/workflows/go-sast-codeql.yaml
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/plexusone/omnidevx-core
- [docs-godoc-url]: https://pkg.go.dev/github.com/plexusone/omnidevx-core
+ [go-ci-svg]: https://github.com/plexusone/omnidevx/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/plexusone/omnidevx/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/plexusone/omnidevx/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/plexusone/omnidevx/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/plexusone/omnidevx/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/plexusone/omnidevx/actions/workflows/go-sast-codeql.yaml
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/plexusone/omnidevx
+ [docs-godoc-url]: https://pkg.go.dev/github.com/plexusone/omnidevx
  [docs-mkdoc-svg]: https://img.shields.io/badge/Go-dev%20guide-blue.svg
- [docs-mkdoc-url]: https://plexusone.dev/omnidevx-core
+ [docs-mkdoc-url]: https://plexusone.github.io/omnidevx
  [viz-svg]: https://img.shields.io/badge/Go-visualizaton-blue.svg
- [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=plexusone%2Fomnidevx-core
- [loc-svg]: https://tokei.rs/b1/github/plexusone/omnidevx-core
- [repo-url]: https://github.com/plexusone/omnidevx-core
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=plexusone%2Fomnidevx
+ [loc-svg]: https://tokei.rs/b1/github/plexusone/omnidevx
+ [repo-url]: https://github.com/plexusone/omnidevx
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/plexusone/omnidevx-core/blob/main/LICENSE
+ [license-url]: https://github.com/plexusone/omnidevx/blob/main/LICENSE
 
 Batteries-included distribution of **OmniDevX** — the PlexusOne
 developer-experience telemetry domain. One import path composes the
@@ -42,6 +42,12 @@ available collector.
 |--------|---------|----------|
 | Claude Code | `providers/claudecode` | omnidevx-core (thin, stdlib) |
 | Codex CLI | `omni-openai/omnidevx` | omni-openai (thick, SQLite) |
+| Git | `providers/git` | omnidevx-core (thin, stdlib via `gogit`) |
+| GitHub | `omni-github/omnidevx` | omni-github (thick, REST + GraphQL) |
+
+`NewDefault` composes the local Claude Code and Codex collectors only; the
+Git and GitHub collectors need explicit configuration (repo roots, tokens)
+so callers add them themselves — see Usage below.
 
 ## Usage
 
@@ -58,18 +64,34 @@ results, err := engine.Collect(ctx, omnidevx.CollectRequest{
 events := omnidevx.Events(results)
 ```
 
-Or compose explicitly:
+Or compose explicitly, adding the Git and GitHub collectors:
 
 ```go
 claude, _ := omnidevx.NewClaudeCodeCollector(omnidevx.ClaudeCodeOptions{})
 codex, _ := omnidevx.NewCodexCollector(omnidevx.CodexConfig{})
-engine := omnidevx.New(claude, codex)
+git, _ := omnidevx.NewGitCollector(omnidevx.GitOptions{Roots: []string{"~/go/src"}})
+gh, _ := omnidevx.NewGitHubCollector(omnidevx.GitHubConfig{
+    Token:    os.Getenv("GITHUB_TOKEN"),
+    Username: "octocat",
+})
+engine := omnidevx.New(claude, codex, git, gh)
 ```
 
 ## Privacy
 
 Events carry metadata only — never prompt text, model responses, or file
 contents. See omnidevx-core for the canonical contract.
+
+## Documentation
+
+Full documentation at [plexusone.github.io/omnidevx](https://plexusone.github.io/omnidevx)
+
+## Related Projects
+
+- [omnidevx-core](https://github.com/plexusone/omnidevx-core) - Canonical event model and contracts
+- [omni-github](https://github.com/plexusone/omni-github) - GitHub DevX collector
+- [omni-openai](https://github.com/plexusone/omni-openai) - Codex CLI collector
+- [omnidxi](https://github.com/plexusone/omnidxi) - Digital Experience Intelligence (not OmniDevX)
 
 ## License
 
