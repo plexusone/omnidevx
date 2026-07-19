@@ -1,0 +1,39 @@
+{
+  "irVersion": "1.0",
+  "project": "omnidevx",
+  "repository": "https://github.com/plexusone/omnidevx",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-07-19",
+      "highlights": [
+        { "description": "Initial release: batteries-included distribution composing omnidevx-core, omni-github, and omni-openai behind one import path" }
+      ],
+      "added": [
+        { "description": "Re-exported canonical types, event/mode/severity constants, and provider constructors (Claude Code, Codex, git, GitHub) under a single `omnidevx` import path", "commit": "20cd110" },
+        { "description": "`NewDefault` for composing local Claude Code and Codex collectors against the current machine's default stores", "commit": "20cd110" },
+        { "description": "`Engine` runs an arbitrary set of `core.Collector`s over one request; one collector failing does not stop the others, and errors are joined with their source named", "commit": "66ad85e" },
+        { "description": "`Events` flattens collection results from multiple collectors into a single event slice", "commit": "66ad85e" }
+      ],
+      "tests": [
+        { "description": "Multi-collector aggregation, per-collector failure isolation with error joining, Add/Collectors chaining, context cancellation, and provider-constructor composition tests", "commit": "fb8fb75" }
+      ],
+      "documentation": [
+        { "description": "README documenting the batteries-included distribution, the OmniDevX/OmniDXI distinction, available collectors, and usage examples", "commit": "57753a8" },
+        { "description": "README shields for CI, lint, SAST, godoc, mkdocs, visualization, and license", "commit": "233ef90" },
+        { "description": "Fix README badges that pointed at omnidevx-core instead of omnidevx, and update the Collectors table to include Git and GitHub", "commit": "1625a5e" },
+        { "description": "MkDocs site (Material theme, matching omni-github/omni-openai/omnidevx-core) with a home page, Collectors reference, and v0.1.0 release notes", "commit": "b1bdcbc" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnidevx-core` v0.1.0 for the canonical event model", "commit": "af19e93" },
+        { "description": "`github.com/plexusone/omni-github` v0.5.0 for the GitHub DevX collector", "commit": "af19e93" },
+        { "description": "`github.com/plexusone/omni-openai` v0.6.0 for the Codex CLI collector", "commit": "af19e93" }
+      ],
+      "infrastructure": [
+        { "description": "GitHub Actions workflows (go-ci, go-lint, go-sast-codeql), Dependabot config, and golangci-lint settings shared with the other omni-* repos", "commit": "bca2222" }
+      ]
+    }
+  ]
+}
