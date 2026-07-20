@@ -27,8 +27,8 @@ github.com/plexusone/omni-github v0.5.0 h1:sVfg8eBZSJTLRfRYJHYeVEPvgwJaep/wrCTRh
 github.com/plexusone/omni-github v0.5.0/go.mod h1:Yfi/ss41Ey5zsYLJQS0WJjlsi+eJhpj+vIqa4bNhu4g=
 github.com/plexusone/omni-openai v0.6.0 h1:jzR7lOAoYc7N46G/LkOfjjjGuQ6CEE/wDojIDQMndhQ=
 github.com/plexusone/omni-openai v0.6.0/go.mod h1:Kl6/IKGjTNmS/xiUJn/RukeRBO+yX2sbK4l6LoSPWBw=
-github.com/plexusone/omnidevx-core v0.1.0 h1:dIwrtz0g3I2jOz4B01XVTkhwTwUEHw3PoCeI2yE47L0=
-github.com/plexusone/omnidevx-core v0.1.0/go.mod h1:8DvoAtycMKcdv2iUSlwBrfQ1DU4BhPrcj4nTzk9iF+4=
+github.com/plexusone/omnidevx-core v0.2.0 h1:p80OdnCR59udMwaizlNuGG8WJ755kFp8+Mvvmpatrv4=
+github.com/plexusone/omnidevx-core v0.2.0/go.mod h1:8DvoAtycMKcdv2iUSlwBrfQ1DU4BhPrcj4nTzk9iF+4=
 github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec h1:W09IVJc94icq4NjY3clb7Lk8O1qJ8BdBEF8z0ibU0rE=
 github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/shurcooL/githubv4 v0.0.0-20260209031235-2402fdf4a9ed h1:KT7hI8vYXgU0s2qaMkrfq9tCA1w/iEPgfredVP+4Tzw=

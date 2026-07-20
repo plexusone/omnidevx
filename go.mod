@@ -5,7 +5,7 @@ go 1.26.0
 require (
 	github.com/plexusone/omni-github v0.5.0
 	github.com/plexusone/omni-openai v0.6.0
-	github.com/plexusone/omnidevx-core v0.1.0
+	github.com/plexusone/omnidevx-core v0.2.0
 )
 
 require (
