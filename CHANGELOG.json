@@ -6,6 +6,34 @@
   "commitConvention": "conventional",
   "releases": [
     {
+      "version": "v0.2.0",
+      "date": "2026-07-27",
+      "highlights": [
+        { "description": "Adds Kiro CLI to the batteries-included OmniDevX bundle via `github.com/plexusone/omni-aws/omnidevx`" },
+        { "description": "`NewDefault` now composes local Claude Code, Codex CLI, and Kiro CLI stores behind one provider contract" }
+      ],
+      "added": [
+        { "description": "Re-exported `NewKiroCollector` and `KiroConfig` so callers can construct the Kiro CLI collector from the top-level `omnidevx` import path", "commit": "ad65477" },
+        { "description": "Included the Kiro CLI collector in `NewDefault` alongside Claude Code and Codex CLI", "commit": "ad65477" }
+      ],
+      "changed": [
+        { "description": "Updated the default bundle examples to show Claude Code, Codex CLI, and Kiro CLI local-store collection", "commit": "ad65477" },
+        { "description": "Raised the module Go directive from 1.26.0 to 1.26.4 after dependency resolution", "commit": "ad65477" }
+      ],
+      "dependencies": [
+        { "description": "Added `github.com/plexusone/omni-aws` v0.10.0 for the Kiro CLI collector", "commit": "ad65477" },
+        { "description": "Bumped `github.com/plexusone/omnidevx-core` from v0.1.0 to v0.2.0 via Dependabot", "commit": "baedd54" },
+        { "description": "Updated `github.com/plexusone/omnidevx-core` to v0.3.0 and refreshed indirect Go module dependencies", "commit": "2bdf202" }
+      ],
+      "tests": [
+        { "description": "Extended provider-constructor composition coverage so Codex CLI and Kiro CLI both tolerate empty local stores while Claude Code still surfaces missing-store errors", "commit": "ad65477" }
+      ],
+      "documentation": [
+        { "description": "Documented Kiro CLI in the README and MkDocs collector guide, including its historical-estimate token behavior", "commit": "ad65477" },
+        { "description": "Added initial `AGENTS.md` and `CLAUDE.md` instructions for repository agents", "commit": "a0aa03f" }
+      ]
+    },
+    {
       "version": "v0.1.0",
       "date": "2026-07-19",
       "highlights": [

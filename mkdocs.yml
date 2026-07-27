@@ -45,9 +45,11 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Usage Guide: guides.md
   - Collectors: collectors.md
   - API Reference: https://pkg.go.dev/github.com/plexusone/omnidevx
   - Releases:
+      - v0.2.0: releases/v0.2.0.md
       - v0.1.0: releases/v0.1.0.md
 
 extra:
