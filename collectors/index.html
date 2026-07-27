@@ -13,10 +13,10 @@
         <link rel="canonical" href="https://plexusone.github.io/omnidevx/collectors/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../guides/">
       
       
-        <link rel="next" href="../releases/v0.1.0/">
+        <link rel="next" href="../releases/v0.2.0/">
       
       
         
@@ -292,6 +292,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -455,10 +482,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -476,8 +503,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -486,6 +513,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases/v0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -614,8 +669,8 @@
 
 <h1 id="collectors">Collectors<a class="headerlink" href="#collectors" title="Permanent link">&para;</a></h1>
 <p><code>omnidevx</code> re-exports a constructor for every collector available across the
-ecosystem. <code>NewDefault</code> composes the two that need no configuration beyond
-local credentials; the rest need explicit setup and are added with
+ecosystem. <code>NewDefault</code> composes the local AI-assistant collectors that can
+use default on-disk stores; the rest need explicit setup and are added with
 <code>Engine.Add</code>.</p>
 <table>
 <thead>
@@ -671,6 +726,10 @@ local credentials; the rest need explicit setup and are added with
 <p>Kiro local records do not always expose exact token accounting. The Kiro
 collector emits historical-estimate usage events with reduced confidence
 when it must reconstruct tokens from local conversation history.</p>
+<p>The provider-specific packages remain the source of truth for local schema
+handling and path drift. <code>omnidevx</code> verifies that each provider satisfies
+the shared collector contract and gives applications one import path for
+the combined bundle.</p>
 <h2 id="git">Git<a class="headerlink" href="#git" title="Permanent link">&para;</a></h2>
 <p>Emits <code>devx.change.committed</code> events, one per commit, with AI co-author
 attribution ported from the canonical <code>KnownAITools</code> registry. Needs
