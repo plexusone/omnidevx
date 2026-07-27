@@ -3,6 +3,7 @@ package omnidevx
 import (
 	"context"
 	"errors"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -114,10 +115,15 @@ func TestProviderConstructors(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	engine := New(claude, cdx)
+	kiro, err := NewKiroCollector(KiroConfig{DBPath: filepath.Join(t.TempDir(), "missing.sqlite3"), SessionsDir: t.TempDir()})
+	if err != nil {
+		t.Fatal(err)
+	}
+	engine := New(claude, cdx, kiro)
 
-	// Claude's collector errors on a missing projects/ dir; Codex tolerates
-	// an empty home. The engine must surface the former and keep the latter.
+	// Claude's collector errors on a missing projects/ dir; Codex and Kiro
+	// tolerate empty stores. The engine must surface the former and keep the
+	// latter two.
 	results, err := engine.Collect(context.Background(), CollectRequest{})
 	if err == nil {
 		t.Fatal("expected error from claude collector on empty dir")
@@ -125,7 +131,14 @@ func TestProviderConstructors(t *testing.T) {
 	if !strings.Contains(err.Error(), "anthropic/claude-code") {
 		t.Errorf("error should name claude collector: %v", err)
 	}
-	if len(results) != 1 || results[0].Source.Product != "codex-cli" {
-		t.Fatalf("expected surviving codex result, got %+v", results)
+	if len(results) != 2 {
+		t.Fatalf("expected two surviving results, got %+v", results)
+	}
+	products := map[string]bool{}
+	for _, r := range results {
+		products[r.Source.Product] = true
+	}
+	if !products["codex-cli"] || !products["kiro-cli"] {
+		t.Fatalf("expected surviving codex and kiro results, got %+v", results)
 	}
 }

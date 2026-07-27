@@ -1,8 +1,9 @@
 module github.com/plexusone/omnidevx
 
-go 1.26.0
+go 1.26.4
 
 require (
+	github.com/plexusone/omni-aws v0.10.0
 	github.com/plexusone/omni-github v0.5.0
 	github.com/plexusone/omni-openai v0.6.0
 	github.com/plexusone/omnidevx-core v0.3.0

@@ -1,6 +1,7 @@
 package omnidevx
 
 import (
+	kiro "github.com/plexusone/omni-aws/omnidevx"
 	githubdevx "github.com/plexusone/omni-github/omnidevx"
 	codex "github.com/plexusone/omni-openai/omnidevx"
 	core "github.com/plexusone/omnidevx-core"
@@ -65,6 +66,7 @@ var (
 	NewCodexCollector      = codex.New
 	NewGitCollector        = gitprovider.New
 	NewGitHubCollector     = githubdevx.New
+	NewKiroCollector       = kiro.New
 )
 
 type (
@@ -72,10 +74,11 @@ type (
 	CodexConfig       = codex.Config
 	GitOptions        = gitprovider.Options
 	GitHubConfig      = githubdevx.Config
+	KiroConfig        = kiro.Config
 )
 
 // NewDefault returns an Engine with every collector that can be constructed
-// in the current environment (local Claude Code and Codex CLI stores under
+// in the current environment (local Claude Code, Codex CLI, and Kiro CLI stores under
 // the user's home directory). The git collector needs explicit repository
 // roots, so callers add it themselves:
 //
@@ -91,5 +94,9 @@ func NewDefault() (*Engine, error) {
 	if err != nil {
 		return nil, err
 	}
-	return New(claude, cdx), nil
+	kiroCollector, err := kiro.New(kiro.Config{})
+	if err != nil {
+		return nil, err
+	}
+	return New(claude, cdx, kiroCollector), nil
 }

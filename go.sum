@@ -23,6 +23,8 @@ github.com/mattn/go-isatty v0.0.24 h1:tGZZoVgT/KiqK1c8ocVLeDS8BSWMRd47J3Lbz7vsRe
 github.com/mattn/go-isatty v0.0.24/go.mod h1:nMCL3Zebbrt45jsMDgnfIwz6ydEQApk5oEI3HqDio6A=
 github.com/ncruces/go-strftime v1.0.0 h1:HMFp8mLCTPp341M/ZnA4qaf7ZlsbTc+miZjCLOFAw7w=
 github.com/ncruces/go-strftime v1.0.0/go.mod h1:Fwc5htZGVVkseilnfgOVb9mKy6w1naJmn9CehxcKcls=
+github.com/plexusone/omni-aws v0.10.0 h1:s6e9yb5M++4oLy8mta0MQp0hbFHNgtdG+0OKXYH9WUc=
+github.com/plexusone/omni-aws v0.10.0/go.mod h1:FAW5MW+3vju58BciEMB1DqWBlCdscsWkxKjWT4hbxyg=
 github.com/plexusone/omni-github v0.5.0 h1:sVfg8eBZSJTLRfRYJHYeVEPvgwJaep/wrCTRh7aDaY0=
 github.com/plexusone/omni-github v0.5.0/go.mod h1:Yfi/ss41Ey5zsYLJQS0WJjlsi+eJhpj+vIqa4bNhu4g=
 github.com/plexusone/omni-openai v0.6.0 h1:jzR7lOAoYc7N46G/LkOfjjjGuQ6CEE/wDojIDQMndhQ=

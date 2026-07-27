@@ -20,12 +20,12 @@ re-exported under this one import path.
 
 ## Quick Start
 
-=== "Default (Claude Code + Codex)"
+=== "Default (Claude Code + Codex + Kiro)"
 
     ```go
     import "github.com/plexusone/omnidevx"
 
-    engine, err := omnidevx.NewDefault() // local Claude Code + Codex stores
+    engine, err := omnidevx.NewDefault() // local Claude Code + Codex + Kiro stores
     if err != nil {
         // handle
     }
@@ -42,12 +42,13 @@ re-exported under this one import path.
     ```go
     claude, _ := omnidevx.NewClaudeCodeCollector(omnidevx.ClaudeCodeOptions{})
     codex, _ := omnidevx.NewCodexCollector(omnidevx.CodexConfig{})
+    kiro, _ := omnidevx.NewKiroCollector(omnidevx.KiroConfig{})
     git, _ := omnidevx.NewGitCollector(omnidevx.GitOptions{Roots: []string{"~/go/src"}})
     gh, _ := omnidevx.NewGitHubCollector(omnidevx.GitHubConfig{
         Token:    os.Getenv("GITHUB_TOKEN"),
         Username: "octocat",
     })
-    engine := omnidevx.New(claude, codex, git, gh)
+    engine := omnidevx.New(claude, codex, kiro, git, gh)
     ```
 
 See [Collectors](collectors.md) for the full list and what each one needs.
@@ -73,4 +74,5 @@ go get github.com/plexusone/omnidevx
 - [omnidevx-core](https://github.com/plexusone/omnidevx-core) - Canonical event model and contracts
 - [omni-github](https://github.com/plexusone/omni-github) - GitHub DevX collector
 - [omni-openai](https://github.com/plexusone/omni-openai) - Codex CLI collector
+- [omni-aws](https://github.com/plexusone/omni-aws) - Kiro CLI collector
 - [omnidxi](https://github.com/plexusone/omnidxi) - Digital Experience Intelligence (not OmniDevX)

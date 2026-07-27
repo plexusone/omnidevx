@@ -9,10 +9,11 @@ local credentials; the rest need explicit setup and are added with
 |--------|---------|----------|-------|
 | Claude Code | `providers/claudecode` | omnidevx-core (thin, stdlib) | none — reads local session store |
 | Codex CLI | `omni-openai/omnidevx` | omni-openai (thick, SQLite) | none — reads local `~/.codex` store |
+| Kiro CLI | `omni-aws/omnidevx` | omni-aws (thick, SQLite) | none — reads local Kiro CLI database and optional `~/.kiro_sessions` archives |
 | Git | `providers/git` | omnidevx-core (thin, stdlib via [`gogit`](https://github.com/grokify/gogit)) | `Roots []string` — repository roots to scan |
 | GitHub | `omni-github/omnidevx` | omni-github (thick, REST + GraphQL) | `Token`, `Username` |
 
-## Claude Code and Codex CLI
+## Claude Code, Codex CLI, and Kiro CLI
 
 Included in `NewDefault()`:
 
@@ -25,7 +26,12 @@ Or individually:
 ```go
 claude, err := omnidevx.NewClaudeCodeCollector(omnidevx.ClaudeCodeOptions{})
 codex, err := omnidevx.NewCodexCollector(omnidevx.CodexConfig{})
+kiro, err := omnidevx.NewKiroCollector(omnidevx.KiroConfig{})
 ```
+
+Kiro local records do not always expose exact token accounting. The Kiro
+collector emits historical-estimate usage events with reduced confidence
+when it must reconstruct tokens from local conversation history.
 
 ## Git
 
@@ -55,10 +61,10 @@ gh, err := omnidevx.NewGitHubCollector(omnidevx.GitHubConfig{
 The GitHub collector requires a bounded `Period` (both `Start` and `End`
 set) — the contribution query needs an explicit range.
 
-## Composing All Four
+## Composing All Five
 
 ```go
-engine := omnidevx.New(claude, codex).Add(git, gh)
+engine := omnidevx.New(claude, codex, kiro).Add(git, gh)
 
 results, err := engine.Collect(ctx, omnidevx.CollectRequest{
     Period:  omnidevx.Period{Start: weekStart, End: weekEnd},

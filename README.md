@@ -42,17 +42,18 @@ available collector.
 |--------|---------|----------|
 | Claude Code | `providers/claudecode` | omnidevx-core (thin, stdlib) |
 | Codex CLI | `omni-openai/omnidevx` | omni-openai (thick, SQLite) |
+| Kiro CLI | `omni-aws/omnidevx` | omni-aws (thick, SQLite) |
 | Git | `providers/git` | omnidevx-core (thin, stdlib via `gogit`) |
 | GitHub | `omni-github/omnidevx` | omni-github (thick, REST + GraphQL) |
 
-`NewDefault` composes the local Claude Code and Codex collectors only; the
+`NewDefault` composes the local Claude Code, Codex, and Kiro collectors; the
 Git and GitHub collectors need explicit configuration (repo roots, tokens)
 so callers add them themselves — see Usage below.
 
 ## Usage
 
 ```go
-engine, err := omnidevx.NewDefault() // local Claude Code + Codex stores
+engine, err := omnidevx.NewDefault() // local Claude Code + Codex + Kiro stores
 if err != nil {
     // handle
 }
@@ -69,12 +70,13 @@ Or compose explicitly, adding the Git and GitHub collectors:
 ```go
 claude, _ := omnidevx.NewClaudeCodeCollector(omnidevx.ClaudeCodeOptions{})
 codex, _ := omnidevx.NewCodexCollector(omnidevx.CodexConfig{})
+kiro, _ := omnidevx.NewKiroCollector(omnidevx.KiroConfig{})
 git, _ := omnidevx.NewGitCollector(omnidevx.GitOptions{Roots: []string{"~/go/src"}})
 gh, _ := omnidevx.NewGitHubCollector(omnidevx.GitHubConfig{
     Token:    os.Getenv("GITHUB_TOKEN"),
     Username: "octocat",
 })
-engine := omnidevx.New(claude, codex, git, gh)
+engine := omnidevx.New(claude, codex, kiro, git, gh)
 ```
 
 ## Privacy
@@ -91,6 +93,7 @@ Full documentation at [plexusone.github.io/omnidevx](https://plexusone.github.io
 - [omnidevx-core](https://github.com/plexusone/omnidevx-core) - Canonical event model and contracts
 - [omni-github](https://github.com/plexusone/omni-github) - GitHub DevX collector
 - [omni-openai](https://github.com/plexusone/omni-openai) - Codex CLI collector
+- [omni-aws](https://github.com/plexusone/omni-aws) - Kiro CLI collector
 - [omnidxi](https://github.com/plexusone/omnidxi) - Digital Experience Intelligence (not OmniDevX)
 
 ## License
