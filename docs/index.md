@@ -18,6 +18,11 @@ global registry. Every canonical type, event/mode/severity constant, and
 provider constructor from `omnidevx-core` and the thick provider modules is
 re-exported under this one import path.
 
+The default bundle is intended for local AI-assistant usage collection.
+Claude Code, Codex CLI, and Kiro CLI are constructed with their default
+local-store locations. Git and GitHub are still explicit because they need a
+repository scan scope or API credentials.
+
 ## Quick Start
 
 === "Default (Claude Code + Codex + Kiro)"
@@ -51,7 +56,8 @@ re-exported under this one import path.
     engine := omnidevx.New(claude, codex, kiro, git, gh)
     ```
 
-See [Collectors](collectors.md) for the full list and what each one needs.
+See [Usage Guide](guides.md) for composition patterns and [Collectors](collectors.md)
+for the full list and what each one needs.
 
 ## Privacy
 

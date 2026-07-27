@@ -1,8 +1,8 @@
 # Collectors
 
 `omnidevx` re-exports a constructor for every collector available across the
-ecosystem. `NewDefault` composes the two that need no configuration beyond
-local credentials; the rest need explicit setup and are added with
+ecosystem. `NewDefault` composes the local AI-assistant collectors that can
+use default on-disk stores; the rest need explicit setup and are added with
 `Engine.Add`.
 
 | Source | Package | Location | Setup |
@@ -32,6 +32,11 @@ kiro, err := omnidevx.NewKiroCollector(omnidevx.KiroConfig{})
 Kiro local records do not always expose exact token accounting. The Kiro
 collector emits historical-estimate usage events with reduced confidence
 when it must reconstruct tokens from local conversation history.
+
+The provider-specific packages remain the source of truth for local schema
+handling and path drift. `omnidevx` verifies that each provider satisfies
+the shared collector contract and gives applications one import path for
+the combined bundle.
 
 ## Git
 
