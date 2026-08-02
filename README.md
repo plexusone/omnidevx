@@ -50,7 +50,26 @@ available collector.
 Git and GitHub collectors need explicit configuration (repo roots, tokens)
 so callers add them themselves — see Usage below.
 
-## Usage
+## CLI
+
+The `omnidevx` CLI collects events from local AI agent session history and
+writes them to the canonical OmniDevX store.
+
+```bash
+# Build
+go build -o omnidevx ./cmd/omnidevx
+
+# Collect events for a date range
+./omnidevx collect --person person:jane --since 2026-07-01 --until 2026-07-31
+
+# Dry run to preview what would be collected
+./omnidevx collect --person person:jane --since 2026-07-28 --until 2026-07-29 --dry-run
+```
+
+Events are written to `~/.plexusone/omnidevx/data/events/` and deduplicated
+by ID, so re-running the same period is safe.
+
+## Library Usage
 
 ```go
 engine, err := omnidevx.NewDefault() // local Claude Code + Codex + Kiro stores
