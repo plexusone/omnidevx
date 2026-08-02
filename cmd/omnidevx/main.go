@@ -66,7 +66,9 @@ func runCollect(args []string) error {
 	until := fs.String("until", "", "end date YYYY-MM-DD (required)")
 	storeDir := fs.String("store", "", "store directory (default ~/.plexusone/omnidevx/data)")
 	dryRun := fs.Bool("dry-run", false, "collect but don't write to store")
-	fs.Parse(args)
+	if err := fs.Parse(args); err != nil {
+		return fmt.Errorf("parse args: %w", err)
+	}
 
 	if *person == "" || *since == "" || *until == "" {
 		fs.Usage()
