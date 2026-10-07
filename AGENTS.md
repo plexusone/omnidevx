@@ -24,6 +24,27 @@ developer-experience telemetry domain. It re-exports canonical types from
 - This repo should re-export provider constructors, compose defaults, and
   test that each provider satisfies the shared collector contract.
 
+## Documentation Layout
+
+Each `docs/` directory has one purpose and its own update rule:
+
+| Path | Purpose | Update when |
+|------|---------|-------------|
+| `docs/index.md` | Site home and overview | The project's scope or entry points change |
+| `docs/guides/` | User-facing guides: how to use OmniDevX | User-visible behavior changes (same PR) |
+| `docs/design/` | Living design docs: how OmniDevX works now | Internals, contracts, or boundaries change (same PR) |
+| `docs/specs/initiatives/<INIT-ID>/` | Initiative specs: what was planned and why | Before and during the initiative; frozen after release |
+| `docs/releases/` | Release notes, one file per tag | Each release |
+
+- Design docs describe current behavior only. Do not write a design doc
+  for code that does not exist yet; that belongs in an initiative spec.
+- Initiative specs keep their ID-based paths (VisionStudio's spec tooling
+  depends on them); give them readable titles in the `mkdocs.yml` nav.
+- When an initiative is released, promote whatever in its TRD is still
+  true into `docs/design/`, link back to the initiative for rationale,
+  and mark the spec as released. Do not otherwise edit released specs.
+- Every page must be listed in the `mkdocs.yml` nav.
+
 ## Release Maintenance
 
 - Update `CHANGELOG.json` for every release and regenerate `CHANGELOG.md`
