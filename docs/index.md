@@ -56,7 +56,7 @@ repository scan scope or API credentials.
     engine := omnidevx.New(claude, codex, kiro, git, gh)
     ```
 
-See [Usage Guide](guides.md) for composition patterns and [Collectors](collectors.md)
+See [Usage Guide](guides/usage.md) for composition patterns and [Collectors](guides/collectors.md)
 for the full list and what each one needs.
 
 ## Privacy
