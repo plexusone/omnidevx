@@ -56,6 +56,6 @@ Each `docs/` directory has one purpose and its own update rule:
 - Run `go test ./...` and `mkdocs build --strict` before committing release
   documentation.
 
-## PRISM Control
+## VisionStudio
 
-This repo is registered in [prism-control](https://github.com/ProductBuildersHQ/prism-control). Use `prismctl work ready --repo github.com/plexusone/omnidevx` to find claimable work, and carry the `Refs: RMI-OMNIDEVX-<NNN>` trailer on every commit.
+This repo is registered in [visionstudio](https://github.com/ProductBuildersHQ/visionstudio). Use `visionstudio work ready --repo github.com/plexusone/omnidevx` to find claimable work, and carry the `Refs: RMI-OMNIDEVX-<NNN>` trailer on every commit.
