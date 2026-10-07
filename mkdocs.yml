@@ -48,6 +48,8 @@ nav:
   - Guides:
       - Usage Guide: guides/usage.md
       - Collectors: guides/collectors.md
+  - Design:
+      - Architecture: design/architecture.md
   - API Reference: https://pkg.go.dev/github.com/plexusone/omnidevx
   - Releases:
       - v0.2.0: releases/v0.2.0.md
