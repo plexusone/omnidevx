@@ -51,6 +51,12 @@ nav:
   - Releases:
       - v0.2.0: releases/v0.2.0.md
       - v0.1.0: releases/v0.1.0.md
+  - Specs:
+      - Session Recovery:
+          - Product Requirements: specs/initiatives/INIT-OMNIDEVX-001/PRD.md
+          - Technical Design: specs/initiatives/INIT-OMNIDEVX-001/TRD.md
+          - Plan: specs/initiatives/INIT-OMNIDEVX-001/PLAN.md
+          - Roadmap: specs/initiatives/INIT-OMNIDEVX-001/ROADMAP.md
 
 extra:
   social:
