@@ -14,6 +14,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/grokify/oscompat/process"
 	codex "github.com/plexusone/omni-openai/omnidevx"
 	"github.com/plexusone/omnidevx-core/providers/claudecode"
 	core "github.com/plexusone/omnidevx-core/sessions"
@@ -123,5 +124,5 @@ func Exec(spec core.ResumeSpec) error {
 			return fmt.Errorf("change to %s: %w", spec.Dir, err)
 		}
 	}
-	return execProcess(path, spec.Argv)
+	return process.Exec(path, spec.Argv)
 }

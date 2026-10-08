@@ -3,6 +3,7 @@ module github.com/plexusone/omnidevx
 go 1.26.4
 
 require (
+	github.com/grokify/oscompat v0.6.0
 	github.com/plexusone/omni-aws v0.11.0
 	github.com/plexusone/omni-github v0.6.1
 	github.com/plexusone/omni-openai v0.7.1
@@ -19,7 +20,6 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/grokify/gogit v0.13.1 // indirect
 	github.com/grokify/gogithub v0.18.0 // indirect
-	github.com/grokify/oscompat v0.6.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-isatty v0.0.24 // indirect
 	github.com/ncruces/go-strftime v1.1.0 // indirect
