@@ -72,8 +72,9 @@ when a `codex` process names its thread ID on the command line, as
 `codex resume <id>` does. A Codex session you started fresh and still have open
 shows as `unknown`, not guessed.
 
-On Windows, OmniDevX cannot verify that a Claude Code session is running, so
-none is reported as `running`. Check for an open window before resuming.
+On Windows, Claude Code sessions are verified the same way. Codex sessions are
+always `unknown` there, because Windows has no `ps` to list processes with, so
+check for an open window before resuming one.
 
 ## Show one session
 

@@ -63,8 +63,9 @@ It never runs anything. This package decides whether running it is safe:
    command.
 
 On Windows a process cannot be replaced, so `Exec` runs the command as a child
-with the terminal attached and exits with its status. The platform split is in
-`exec_unix.go` and `exec_windows.go`.
+with the terminal attached and exits with its status. That platform split
+lives in `process.Exec` from [`oscompat`](https://github.com/grokify/oscompat),
+which this package calls.
 
 ## Privacy boundary
 
@@ -89,11 +90,12 @@ State comes from the reader, because only the harness knows how it records a
 live process:
 
 - **Claude Code** writes a record per live process. The reader accepts it only
-  if the process exists and started when the record says it did. On Windows
-  the start time cannot be read, so no session is reported as `running`.
+  if the process exists and started when the record says it did. The check
+  is the same on macOS, Linux, and Windows.
 - **Codex CLI** writes no such record. The reader reports `running` only when
   a `codex` process names the thread ID on its command line, and otherwise
-  reports `unknown` rather than guessing.
+  reports `unknown` rather than guessing. It lists processes with `ps`, so on
+  Windows, which has no `ps`, every Codex session is `unknown`.
 
 ## Version
 

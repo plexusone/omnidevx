@@ -7,7 +7,7 @@
   "releases": [
     {
       "version": "v0.3.0",
-      "date": "2026-10-07",
+      "date": "2026-10-08",
       "highlights": [
         { "description": "**Session recovery**: `omnidevx sessions` lists your Claude Code and Codex CLI sessions with state and title, shows one in detail, and resumes it in its original directory", "commit": "00fd30e" }
       ],
@@ -16,7 +16,8 @@
         { "description": "`omnidevx sessions show <id>` prints one session's directory, branch, timestamps, state, recent prompts, and resume command", "commit": "00fd30e" },
         { "description": "`omnidevx sessions resume <id>` runs the agent's own resume command from the session's directory, refusing a running session unless `--force` is given and stopping if the directory is gone, with `--print` to show the command instead", "commit": "00fd30e" },
         { "description": "Session catalog composing the Claude Code and Codex CLI readers, with unique-prefix ID resolution and a failing reader no longer hiding the other's sessions, re-exported from the top-level package", "commit": "683b0f5" },
-        { "description": "Resume works on Windows by running the command as a child process, and the directory filter compares cleaned paths on both sides", "commit": "d98795a" }
+        { "description": "Resume works on Windows by running the command as a child process, and the directory filter compares cleaned paths on both sides", "commit": "d98795a" },
+        { "description": "Claude Code sessions are reported as running on Windows as on macOS and Linux, through omnidevx-core v0.4.1", "commit": "bcc17c3" }
       ],
       "changed": [
         { "description": "Migrated the `omnidevx` CLI to Cobra, preserving the `collect` and `version` commands", "commit": "00fd30e" }
@@ -29,7 +30,8 @@
         { "description": "Pointed work tracking at VisionStudio in AGENTS.md", "commit": "60191fa" }
       ],
       "dependencies": [
-        { "description": "Bumped `github.com/plexusone/omnidevx-core` from v0.3.0 to v0.4.0 and `github.com/plexusone/omni-openai` from v0.6.1 to v0.7.0", "commit": "6d68303" },
+        { "description": "Bumped `github.com/plexusone/omnidevx-core` from v0.3.0 to v0.4.1 and `github.com/plexusone/omni-openai` from v0.6.1 to v0.7.1", "commit": "bcc17c3" },
+        { "description": "Added `github.com/grokify/oscompat` v0.6.0 for the process hand-off on resume", "commit": "d506862" },
         { "description": "Bumped `github.com/grokify/gogithub` from v0.17.0 to v0.18.0", "commit": "3e52a9e" },
         { "description": "Bumped `github.com/plexusone/omni-aws` from v0.10.0 to v0.11.0 and `github.com/plexusone/omni-github` from v0.6.0 to v0.6.1", "commit": "b008d61" }
       ]
