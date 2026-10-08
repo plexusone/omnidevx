@@ -59,11 +59,29 @@ repository scan scope or API credentials.
 See [Usage Guide](guides/usage.md) for composition patterns and [Collectors](guides/collectors.md)
 for the full list and what each one needs.
 
+## Session Recovery
+
+The `omnidevx` CLI also finds, describes, and resumes your Claude Code and
+Codex CLI sessions:
+
+```bash
+omnidevx sessions                # newest first, with state and title
+omnidevx sessions resume <id>    # runs the agent's own resume command
+```
+
+See the [Sessions guide](guides/sessions.md), and
+[Sessions design](design/sessions.md) for how it is built.
+
 ## Privacy
 
 Events carry metadata only — never prompt text, model responses, or file
 contents. See [omnidevx-core](https://github.com/plexusone/omnidevx-core)
 for the canonical contract.
+
+The session commands are the one place that reads titles and prompts, so you
+can recognize a session. That text is read locally on demand, shown in your
+terminal, and never written to the event store. See the
+[Sessions guide](guides/sessions.md#privacy).
 
 ## Installation
 

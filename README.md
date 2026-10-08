@@ -69,6 +69,18 @@ go build -o omnidevx ./cmd/omnidevx
 Events are written to `~/.plexusone/omnidevx/data/events/` and deduplicated
 by ID, so re-running the same period is safe.
 
+It also finds and resumes your Claude Code and Codex CLI sessions:
+
+```bash
+./omnidevx sessions                  # newest first, with state and title
+./omnidevx sessions --cwd . --since 7d
+./omnidevx sessions show <id>
+./omnidevx sessions resume <id>      # runs the agent's own resume command
+```
+
+Session titles and prompts are read locally on demand and never written to
+the event store. See the [Sessions guide](docs/guides/sessions.md).
+
 ## Library Usage
 
 ```go
