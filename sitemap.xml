@@ -2,22 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://plexusone.github.io/omnidevx/</loc>
-         <lastmod>2026-07-27</lastmod>
+         <lastmod>2026-10-08</lastmod>
     </url>
     <url>
-         <loc>https://plexusone.github.io/omnidevx/collectors/</loc>
-         <lastmod>2026-07-27</lastmod>
+         <loc>https://plexusone.github.io/omnidevx/design/architecture/</loc>
+         <lastmod>2026-10-08</lastmod>
     </url>
     <url>
-         <loc>https://plexusone.github.io/omnidevx/guides/</loc>
-         <lastmod>2026-07-27</lastmod>
+         <loc>https://plexusone.github.io/omnidevx/design/sessions/</loc>
+         <lastmod>2026-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/omnidevx/guides/collectors/</loc>
+         <lastmod>2026-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/omnidevx/guides/sessions/</loc>
+         <lastmod>2026-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/omnidevx/guides/usage/</loc>
+         <lastmod>2026-10-08</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/omnidevx/releases/v0.1.0/</loc>
-         <lastmod>2026-07-27</lastmod>
+         <lastmod>2026-10-08</lastmod>
     </url>
     <url>
          <loc>https://plexusone.github.io/omnidevx/releases/v0.2.0/</loc>
-         <lastmod>2026-07-27</lastmod>
+         <lastmod>2026-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/omnidevx/releases/v0.3.0/</loc>
+         <lastmod>2026-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/omnidevx/specs/initiatives/INIT-OMNIDEVX-001/PLAN/</loc>
+         <lastmod>2026-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/omnidevx/specs/initiatives/INIT-OMNIDEVX-001/PRD/</loc>
+         <lastmod>2026-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/omnidevx/specs/initiatives/INIT-OMNIDEVX-001/ROADMAP/</loc>
+         <lastmod>2026-10-08</lastmod>
+    </url>
+    <url>
+         <loc>https://plexusone.github.io/omnidevx/specs/initiatives/INIT-OMNIDEVX-001/TRD/</loc>
+         <lastmod>2026-10-08</lastmod>
     </url>
 </urlset>
