@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -36,6 +37,18 @@ func (f fakeReader) List(_ context.Context, opts core.ListOptions) ([]core.Sessi
 	return out, nil, nil
 }
 
+// absPath turns a slash-separated fixture path into the absolute form the
+// OS uses, which is a no-op on Unix and adds the drive on Windows, so the
+// fixtures and a --cwd argument (made absolute by the command) agree.
+func absPath(t *testing.T, p string) string {
+	t.Helper()
+	abs, err := filepath.Abs(filepath.FromSlash(p))
+	if err != nil {
+		t.Fatal(err)
+	}
+	return abs
+}
+
 func fixture(t *testing.T) deps {
 	t.Helper()
 	dir := t.TempDir()
@@ -47,11 +60,11 @@ func fixture(t *testing.T) deps {
 		}
 	}
 	claude := fakeReader{core.HarnessClaudeCode, []core.Session{
-		mk(core.HarnessClaudeCode, "aaaa1111-0000", "/Users/example/go/src/github.com/org/app", "App work", 5*time.Minute, core.StateRunning),
-		mk(core.HarnessClaudeCode, "aaaa2222-0000", "/Users/example/go/src/github.com/org/lib", "Lib work", 30*time.Hour, core.StateResumable),
+		mk(core.HarnessClaudeCode, "aaaa1111-0000", absPath(t, "/Users/example/go/src/github.com/org/app"), "App work", 5*time.Minute, core.StateRunning),
+		mk(core.HarnessClaudeCode, "aaaa2222-0000", absPath(t, "/Users/example/go/src/github.com/org/lib"), "Lib work", 30*time.Hour, core.StateResumable),
 	}}
 	codex := fakeReader{core.HarnessCodex, []core.Session{
-		mk(core.HarnessCodex, "bbbb3333-0000", "/Users/example/go/src/github.com/org/app/sub", "Codex work", 2*time.Hour, core.StateUnknown),
+		mk(core.HarnessCodex, "bbbb3333-0000", absPath(t, "/Users/example/go/src/github.com/org/app/sub"), "Codex work", 2*time.Hour, core.StateUnknown),
 		{Harness: core.HarnessCodex, ID: "bbbb4444-0000", CWD: dir, Title: "Old", Archived: true,
 			LastActivityAt: now.Add(-100 * time.Hour), Resume: core.ResumeSpec{Argv: []string{"codex", "resume", "bbbb4444-0000"}, Dir: dir}},
 	}}
@@ -109,7 +122,7 @@ func TestSessionsListFilters(t *testing.T) {
 		{"since", []string{"sessions", "--since", "24h"}, []string{"App work", "Codex work"}, []string{"Lib work"}},
 		{"harness", []string{"sessions", "--harness", "codex"}, []string{"Codex work"}, []string{"App work", "Lib work"}},
 		{"state", []string{"sessions", "--state", "running"}, []string{"App work"}, []string{"Lib work", "Codex work"}},
-		{"cwd", []string{"sessions", "--cwd", "/Users/example/go/src/github.com/org/app"}, []string{"App work", "Codex work"}, []string{"Lib work"}},
+		{"cwd", []string{"sessions", "--cwd", absPath(t, "/Users/example/go/src/github.com/org/app")}, []string{"App work", "Codex work"}, []string{"Lib work"}},
 		{"limit", []string{"sessions", "-n", "1"}, []string{"App work"}, []string{"Lib work", "Codex work"}},
 		{"all includes archived", []string{"sessions", "--all"}, []string{"Old"}, nil},
 		{"no content", []string{"sessions", "--no-content"}, []string{"App work"}, nil}, // fake reader ignores NoContent
@@ -187,7 +200,7 @@ func TestSessionsShow(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, want := range []string{"claude session aaaa2222-0000", "Lib work", "/Users/example/go/src/github.com/org/lib", "Last human", "Resume", "claude-code resume aaaa2222-0000"} {
+	for _, want := range []string{"claude session aaaa2222-0000", "Lib work", absPath(t, "/Users/example/go/src/github.com/org/lib"), "Last human", "Resume", "claude-code resume aaaa2222-0000"} {
 		if !strings.Contains(out, want) {
 			t.Errorf("missing %q:\n%s", want, out)
 		}
