@@ -45,7 +45,7 @@ history, and lists and resumes coding-agent sessions (Claude Code, Codex CLI).`,
 			Short: "Print version",
 			Args:  cobra.NoArgs,
 			Run: func(cmd *cobra.Command, _ []string) {
-				fmt.Fprintln(cmd.OutOrStdout(), "omnidevx v0.1.0")
+				fmt.Fprintln(cmd.OutOrStdout(), "omnidevx", buildVersion())
 			},
 		},
 	)

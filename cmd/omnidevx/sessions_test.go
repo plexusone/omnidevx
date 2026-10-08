@@ -339,9 +339,16 @@ func TestAgeAndShortPath(t *testing.T) {
 }
 
 func TestVersionAndCollectValidation(t *testing.T) {
+	old := version
+	t.Cleanup(func() { version = old })
+	version = "v9.9.9"
 	out, _, err := run(t, fixture(t), "version")
-	if err != nil || strings.TrimSpace(out) != "omnidevx v0.1.0" {
+	if err != nil || strings.TrimSpace(out) != "omnidevx v9.9.9" {
 		t.Fatalf("version out=%q err=%v", out, err)
+	}
+	version = ""
+	if got := buildVersion(); got == "" {
+		t.Fatal("buildVersion must never be empty")
 	}
 	_, _, err = run(t, fixture(t), "collect")
 	if err == nil || !strings.Contains(err.Error(), "--person, --since, and --until are required") {
