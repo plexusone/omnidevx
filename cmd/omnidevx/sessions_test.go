@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"path/filepath"
+	"runtime"
 	"strings"
 	"testing"
 	"time"
@@ -71,7 +72,7 @@ func fixture(t *testing.T) deps {
 	return deps{
 		catalog: func() (*core.Catalog, error) { return core.NewCatalog(claude, codex), nil },
 		now:     func() time.Time { return now },
-		home:    "/Users/example",
+		home:    absPath(t, "/Users/example"),
 		exec:    func(core.ResumeSpec) error { return errors.New("exec must not run in this test") },
 	}
 }
@@ -366,5 +367,43 @@ func TestVersionAndCollectValidation(t *testing.T) {
 	_, _, err = run(t, fixture(t), "collect")
 	if err == nil || !strings.Contains(err.Error(), "--person, --since, and --until are required") {
 		t.Fatalf("collect without flags: err = %v", err)
+	}
+}
+
+// A native Windows path shortens like a Unix one: the home prefix and
+// go/src are stripped, so the repository path stays readable.
+func TestShortPathWindowsPaths(t *testing.T) {
+	if runtime.GOOS != "windows" {
+		t.Skip("backslash is only a path separator on Windows")
+	}
+	// Written with forward slashes and converted, so the native form is what
+	// the code under test receives on Windows.
+	native := func(p string) string { return strings.ReplaceAll(p, "/", `\`) }
+	home := native("C:/Users/example")
+	for _, c := range []struct{ in, want string }{
+		{native("C:/Users/example/go/src/github.com/org/app"), "github.com/org/app"},
+		{native("C:/Users/example/notes"), "~/notes"},
+		{native("D:/work/elsewhere"), "D:/work/elsewhere"},
+	} {
+		if got := shortPath(c.in, home, 34); got != c.want {
+			t.Errorf("shortPath(%q) = %q, want %q", c.in, got, c.want)
+		}
+	}
+}
+
+// On Windows filepath.ToSlash turns a native path into a drive-letter path
+// with forward slashes, so this exercises the same shortening logic on any OS.
+func TestShortPathDriveLetterPaths(t *testing.T) {
+	home := "D:/people/example"
+	for _, c := range []struct{ in, want string }{
+		{home + "/go/src/github.com/org/app", "github.com/org/app"},
+		{home + "/notes", "~/notes"},
+		{home, "~"},
+		{"E:/elsewhere/project", "E:/elsewhere/project"},
+		{"D:/people/example-two/x", "D:/people/example-two/x"}, // shares a prefix with home but is not under it
+	} {
+		if got := shortPath(c.in, home, 34); got != c.want {
+			t.Errorf("shortPath(%q) = %q, want %q", c.in, got, c.want)
+		}
 	}
 }

@@ -322,6 +322,10 @@ func stamp(t, now time.Time) string {
 // identifies a project), and when width > 0 leading components are elided
 // until it fits.
 func shortPath(p, home string, width int) string {
+	// Display paths with forward slashes on every OS, so a Windows path
+	// shortens the same way: the home prefix and ~/go/src are matched and
+	// the truncation below splits on separators. This is a no-op on Unix.
+	p, home = filepath.ToSlash(p), filepath.ToSlash(home)
 	if home != "" && (p == home || strings.HasPrefix(p, home+"/")) {
 		p = "~" + strings.TrimPrefix(p, home)
 	}
