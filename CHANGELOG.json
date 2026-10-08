@@ -17,7 +17,8 @@
         { "description": "`omnidevx sessions resume <id>` runs the agent's own resume command from the session's directory, refusing a running session unless `--force` is given and stopping if the directory is gone, with `--print` to show the command instead", "commit": "00fd30e" },
         { "description": "Session catalog composing the Claude Code and Codex CLI readers, with unique-prefix ID resolution and a failing reader no longer hiding the other's sessions, re-exported from the top-level package", "commit": "683b0f5" },
         { "description": "Resume works on Windows by running the command as a child process, and the directory filter compares cleaned paths on both sides", "commit": "d98795a" },
-        { "description": "Claude Code sessions are reported as running on Windows as on macOS and Linux, through omnidevx-core v0.4.1", "commit": "bcc17c3" }
+        { "description": "Claude Code sessions are reported as running on Windows as on macOS and Linux, through omnidevx-core v0.4.1", "commit": "bcc17c3" },
+        { "description": "The sessions table shortens Windows working directories the same way as Unix ones, stripping the home and go/src prefixes", "commit": "c47c588" }
       ],
       "changed": [
         { "description": "Migrated the `omnidevx` CLI to Cobra, preserving the `collect` and `version` commands", "commit": "00fd30e" }
