@@ -12,7 +12,6 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
-	"syscall"
 	"time"
 
 	codex "github.com/plexusone/omni-openai/omnidevx"
@@ -53,8 +52,11 @@ func (f Filter) Apply(in []core.Session) []core.Session {
 		if f.State != "" && s.State != f.State {
 			continue
 		}
-		if f.CWD != "" && s.CWD != cwd && !strings.HasPrefix(s.CWD, cwd+string(filepath.Separator)) {
-			continue
+		if f.CWD != "" {
+			sc := filepath.Clean(s.CWD)
+			if sc != cwd && !strings.HasPrefix(sc, cwd+string(filepath.Separator)) {
+				continue
+			}
 		}
 		out = append(out, s)
 	}
@@ -105,8 +107,9 @@ func Prepare(s core.Session, force bool) (core.ResumeSpec, error) {
 	return spec, nil
 }
 
-// Exec replaces the current process with the resume command, run from the
-// spec's directory. It returns only if the command could not be started.
+// Exec runs the resume command from the spec's directory, replacing the
+// current process where the platform allows it. It returns only if the
+// command could not be started.
 func Exec(spec core.ResumeSpec) error {
 	if len(spec.Argv) == 0 {
 		return fmt.Errorf("empty resume command")
@@ -120,5 +123,5 @@ func Exec(spec core.ResumeSpec) error {
 			return fmt.Errorf("change to %s: %w", spec.Dir, err)
 		}
 	}
-	return syscall.Exec(path, spec.Argv, os.Environ()) //nolint:gosec // argv comes from the session's own reader
+	return execProcess(path, spec.Argv)
 }
