@@ -3,7 +3,7 @@ module github.com/plexusone/omnidevx
 go 1.26.4
 
 require (
-	github.com/grokify/oscompat v0.6.0
+	github.com/grokify/oscompat v0.7.0
 	github.com/plexusone/omni-aws v0.11.0
 	github.com/plexusone/omni-github v0.6.1
 	github.com/plexusone/omni-openai v0.7.1
