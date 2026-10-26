@@ -9,7 +9,7 @@ require (
 	github.com/plexusone/omni-openai v0.7.1
 	github.com/plexusone/omnidevx-core v0.4.1
 	github.com/spf13/cobra v1.10.2
-	modernc.org/sqlite v1.60.1
+	modernc.org/sqlite v1.61.0
 )
 
 require (
@@ -28,8 +28,8 @@ require (
 	github.com/shurcooL/graphql v0.0.0-20240915155400-7ee5256398cf // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	golang.org/x/oauth2 v0.37.0 // indirect
-	golang.org/x/sys v0.48.0 // indirect
-	modernc.org/libc v1.77.1 // indirect
+	golang.org/x/sys v0.49.0 // indirect
+	modernc.org/libc v1.79.0 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.12.1 // indirect
 )
