@@ -6,7 +6,7 @@ require (
 	github.com/grokify/oscompat v0.13.0
 	github.com/plexusone/omni-aws v0.11.0
 	github.com/plexusone/omni-github v0.6.1
-	github.com/plexusone/omni-openai v0.8.0
+	github.com/plexusone/omni-openai v0.8.1
 	github.com/plexusone/omnidevx-core v0.4.1
 	github.com/spf13/cobra v1.10.2
 	modernc.org/sqlite v1.62.0
@@ -28,8 +28,8 @@ require (
 	github.com/shurcooL/graphql v0.0.0-20240915155400-7ee5256398cf // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	golang.org/x/oauth2 v0.37.0 // indirect
-	golang.org/x/sys v0.49.0 // indirect
-	modernc.org/libc v1.80.1 // indirect
+	golang.org/x/sys v0.50.0 // indirect
+	modernc.org/libc v1.81.2 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
-	modernc.org/memory v1.12.1 // indirect
+	modernc.org/memory v1.13.0 // indirect
 )
