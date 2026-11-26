@@ -9,7 +9,7 @@ require (
 	github.com/plexusone/omni-openai v0.8.0
 	github.com/plexusone/omnidevx-core v0.4.1
 	github.com/spf13/cobra v1.10.2
-	modernc.org/sqlite v1.62.0
+	modernc.org/sqlite v1.63.0
 )
 
 require (
